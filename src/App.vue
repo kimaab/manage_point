@@ -1,24 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <h1>Point Management System</h1>
+    <UserForm @user-added="fetchUsers" />
+    <UserList ref="userList" />
+    <PointTransactionForm @transaction-added="fetchTransactions" />
+    <PointTransactionList ref="transactionList" />
+    <PointLimitList />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UserForm from './components/UserForm.vue';
+import UserList from './components/UserList.vue';
+import PointTransactionForm from './components/PointTransactionForm.vue';
+import PointTransactionList from './components/PointTransactionList.vue';
+import PointLimitList from './components/PointLimitList.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    UserForm,
+    UserList,
+    PointTransactionForm,
+    PointTransactionList,
+    PointLimitList,
+  },
+  methods: {
+    fetchUsers() {
+      this.$refs.userList.fetchUsers();
+    },
+    fetchTransactions() {
+      this.$refs.transactionList.fetchTransactions();
+    },
+  },
+};
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
